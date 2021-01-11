@@ -38,5 +38,16 @@ func main() {
 
 	logger.GetLogger().Info("ant-go init success")
 
-	httpd.Run()
+	app := httpd.New()
+	app.Get("/hello", helloHandlerFunc)
+	app.Get("/hi", hiHandlerFunc)
+	app.Run()
+}
+
+func helloHandlerFunc(c *httpd.AntContext) {
+	c.Write.Write([]byte("Hello ant-go"))
+}
+
+func hiHandlerFunc(c *httpd.AntContext) {
+	c.Write.Write([]byte("Hi ant-go"))
 }
