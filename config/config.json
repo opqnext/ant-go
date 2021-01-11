@@ -1,0 +1,6 @@
+{
+    "log_config": {
+        "log_path": "/var/logs/goin-go-logs/goin-go-logs.log",
+        "log_level": "debug"
+    }
+}
