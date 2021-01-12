@@ -1,8 +1,8 @@
 package main
 
 import (
+	"ant-go/ant"
 	"ant-go/config"
-	"ant-go/httpd"
 	"ant-go/logger"
 	"flag"
 	"fmt"
@@ -38,16 +38,12 @@ func main() {
 
 	logger.GetLogger().Info("ant-go init success")
 
-	app := httpd.New()
+	app := ant.New()
 	app.Get("/hello", helloHandlerFunc)
-	app.Get("/hi", hiHandlerFunc)
+	//app.Get("/hi", hiHandlerFunc)
 	app.Run()
 }
 
-func helloHandlerFunc(c *httpd.AntContext) {
+func helloHandlerFunc(c *ant.Context) {
 	c.Write.Write([]byte("Hello ant-go"))
-}
-
-func hiHandlerFunc(c *httpd.AntContext) {
-	c.Write.Write([]byte("Hi ant-go"))
 }

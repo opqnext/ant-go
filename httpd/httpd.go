@@ -1,6 +1,9 @@
 package httpd
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 //https://www.cnblogs.com/ham-731/p/12637656.html
 
@@ -32,18 +35,18 @@ func (f AntHandlerFunc) ServeHTTP(c *AntContext) {
 
 //路由
 type Router struct {
-	method   string
-	path     string
-	handlers []AntHandlerFunc
+	method  string
+	path    string
+	handles []AntHandlerFunc
 }
 
 //给 AntEngine 的  routers 里面添加路由
 //AddRouter 方法属于 AntEngine 类型对象中的方法
 func (e *AntEngine) AddRouter(method string, path string, h []AntHandlerFunc) {
 	e.routers[method+"_"+path] = &Router{
-		method:   method,
-		path:     path,
-		handlers: h,
+		method:  method,
+		path:    path,
+		handles: h,
 	}
 }
 
@@ -83,11 +86,13 @@ func (e *AntEngine) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	router := e.routers[method+"_"+path]
 
+	fmt.Printf("=== e %v router: %v \n", e, router)
+
 	c := &AntContext{
 		Request:  r,
 		Write:    w,
 		index:    -1,
-		handlers: router.handlers,
+		handlers: router.handles,
 	}
 
 	c.Next()

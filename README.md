@@ -1,2 +1,2 @@
-# ant-go
-ant-go框架
+# Ant-go Web Framework
+Ant-go is a web framework written in Go (Golang). 
