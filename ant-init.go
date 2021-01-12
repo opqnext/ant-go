@@ -1,7 +1,6 @@
-package main
+package ant
 
 import (
-	"ant-go/ant"
 	"ant-go/config"
 	"ant-go/logger"
 	"flag"
@@ -9,7 +8,8 @@ import (
 	"os"
 )
 
-func main() {
+func checkConfig() {
+
 	var configPath string
 
 	//获取配置文件
@@ -37,13 +37,4 @@ func main() {
 	}
 
 	logger.GetLogger().Info("ant-go init success")
-
-	app := ant.New()
-	app.Get("/hello", helloHandlerFunc)
-	//app.Get("/hi", hiHandlerFunc)
-	app.Run()
-}
-
-func helloHandlerFunc(c *ant.Context) {
-	c.Write.Write([]byte("Hello ant-go"))
 }

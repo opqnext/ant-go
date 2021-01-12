@@ -96,12 +96,15 @@ func (e *Engine) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func New() *Engine {
-	e := &Engine{}
-	e.routers = make(map[string]*Router)
-	return e
-	//return &Engine{
-	//	routers: make(map[string]*Router),
-	//}
+	//e := &Engine{}
+	//e.routers = make(map[string]*Router)
+	//return e
+
+	checkConfig()
+
+	return &Engine{
+		routers: make(map[string]*Router),
+	}
 }
 
 func (e *Engine) Run() {
